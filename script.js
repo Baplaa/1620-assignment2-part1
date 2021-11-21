@@ -6,8 +6,8 @@ function cleanUpIndex() {
     }
 }
 
-function createSingleIndex(card) {
-    return `<a href="page3.html"><div class="contact">${card.name}</div></a>`
+function createSingleIndex(contact) {
+    return `<a href="page3.html"><div class="contact">${contact.name}</div></a>`
 }
 
 function renderIndex(contactList) {
@@ -16,6 +16,7 @@ function renderIndex(contactList) {
         classMain.insertAdjacentHTML('beforeend', createSingleIndex(contactList[i]))
     }
 }
+
 
 // View Page JS // 
 function cleanUpView() {
@@ -53,6 +54,66 @@ function renderView(contact) {
     </div>`
     contactInfo.insertAdjacentHTML('beforeend', viewButtons)
 }
+
+
+// Create Page JS //
+
+function cleanUpCreate() {
+    let classMain = document.querySelector('.main')
+    while (classMain.firstChild) {
+        classMain.removeChild(classMain.firstChild)
+    }
+}
+
+function renderCreate() {
+    let classMain = document.querySelector('.main')
+    
+    let inputType = ['text', 'tel', 'text', 'email']
+    let contactType = ['Name', 'Phone', 'Address', 'Email']
+	let fieldType = contactType.slice(0)
+
+	for (let i = 0; i < fieldType.length; i++) (
+		fieldType[i] = fieldType[i].toLowerCase()
+	)
+
+    let inputContainer = []
+
+	for (let i = 0; i <= 3; i++) {
+		inputContainer[i] = 
+		`<div class="inputcontainer">
+			<input type="${inputType[i]}" id="contact${fieldType[i]}" name="contact${fieldType[i]}" placeholder="Contact ${contactType[i]}">
+			<button class="extrafield" id="extra${fieldType[i]}field" name="extra${fieldType[i]}field">+</button>
+		</div>`
+	}
+
+	let editContact = 
+	`<div class="contactedit">
+		<div class="contactimg">
+			<img src="./img/profile.jpg" class ="profilepic" alt="Profile picture">
+		</div>
+		<div class="form">
+			<form>
+			</form>
+		</div>	
+	</div>`
+
+	classMain.insertAdjacentHTML('afterbegin', editContact)
+
+	let createContent = document.querySelector('form')
+
+	for (let i = 0; i < inputContainer.length; i++) {
+		createContent.innerHTML += inputContainer[i]
+	}
+
+	let createButtons = 
+	`<div class="buttons">
+		<button type="submit" class="button save" id="savecontact" name="savecontact">Save Contact</button>
+		<button type="reset" class="button cancel" id="cancel" name="cancel">Cancel</button>
+	</div>`
+
+	createContent.insertAdjacentHTML('beforeend', createButtons)
+}
+
 
 // I used the sample contactList, very cool Jeremy! //
 const contactList = [  
