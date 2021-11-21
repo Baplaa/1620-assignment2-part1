@@ -26,7 +26,7 @@ function cleanUpView() {
     }
 }
 
-function renderView(contact) {
+function renderView(contactList) { // utilizes the sample contactList to show it works; I had this as "contact"
     let classMain = document.querySelector('.main')
 
     classMain.insertAdjacentHTML('afterbegin', `<div class='contactinfo'></div>`)
@@ -37,10 +37,10 @@ function renderView(contact) {
 
     let contactType = ['name', 'email', 'phone', 'address']
     let pushedContent = []
-    pushedContent.push(`<div class="contact${contactType[0]}">${contact[contactType[0]]}</div>`)
+    pushedContent.push(`<div class="contact${contactType[0]}">${contactList[0][contactType[0]]}</div>`) // *would have been just "contact"
 
     for (let i = 1; i <= 3; i++) {
-        pushedContent.push(`<div class="contact${contactType[i]}">${contactType[i]}: ${contact[contactType[i]]}</div>`)
+        pushedContent.push(`<div class="contact${contactType[i]}">${contactType[i]}: ${contactList[0][contactType[i]]}</div>`) // *prev comment
     }
 
     for (let i = 0; i <= 3; i++) {
@@ -68,16 +68,14 @@ function cleanUpCreate() {
 function renderCreate() {
     let classMain = document.querySelector('.main')
     
-    let inputType = ['text', 'tel', 'text', 'email']
     let contactType = ['Name', 'Phone', 'Address', 'Email']
 	let fieldType = contactType.slice(0)
-
 	for (let i = 0; i < fieldType.length; i++) (
 		fieldType[i] = fieldType[i].toLowerCase()
 	)
 
+	let inputType = ['text', 'tel', 'text', 'email']
     let inputContainer = []
-
 	for (let i = 0; i <= 3; i++) {
 		inputContainer[i] = 
 		`<div class="inputcontainer">
@@ -96,11 +94,9 @@ function renderCreate() {
 			</form>
 		</div>	
 	</div>`
-
 	classMain.insertAdjacentHTML('afterbegin', editContact)
 
 	let createContent = document.querySelector('form')
-
 	for (let i = 0; i < inputContainer.length; i++) {
 		createContent.innerHTML += inputContainer[i]
 	}
@@ -110,7 +106,6 @@ function renderCreate() {
 		<button type="submit" class="button save" id="savecontact" name="savecontact">Save Contact</button>
 		<button type="reset" class="button cancel" id="cancel" name="cancel">Cancel</button>
 	</div>`
-
 	createContent.insertAdjacentHTML('beforeend', createButtons)
 }
 
