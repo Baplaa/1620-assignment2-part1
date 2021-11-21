@@ -28,14 +28,12 @@ function cleanUpView() {
 function renderView(contact) {
     let classMain = document.querySelector('.main')
 
-    // Top Part //
     classMain.insertAdjacentHTML('afterbegin', `<div class='contactinfo'></div>`)
     let contactInfo = document.querySelector('.contactinfo')
 
     let contactAvatar = `<img src="./img/profile.jpg" class="profilepic" alt="Profile picture">`
     contactInfo.insertAdjacentHTML('beforeend', contactAvatar)
 
-    // Middle Part //
     let contactType = ['name', 'email', 'phone', 'address']
     let pushedContent = []
     pushedContent.push(`<div class="contact${contactType[0]}">${contact[contactType[0]]}</div>`)
@@ -48,7 +46,6 @@ function renderView(contact) {
         contactInfo.insertAdjacentHTML('beforeend', pushedContent[i])
     }
 
-    // Bottom Part //
     let viewButtons = 
     `<div class="buttons">
         <button class="button edit" value="Edit">Edit</button>
